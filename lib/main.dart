@@ -35,6 +35,9 @@ class HomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               final contact = contacts[index];
               return Dismissible(
+                onDismissed: (direction) {
+                  ContactBook().remove(contact: contact);
+                },
                 key: ValueKey(contact.id),
                 child: Material(
                   color: Colors.white,
@@ -71,8 +74,6 @@ class ContactBook extends ValueNotifier<List<Contact>> {
   ContactBook._sharedInstance() : super([]);
   static final ContactBook _shared = ContactBook._sharedInstance();
   factory ContactBook() => _shared;
-
-  final List<Contact> _contacts = [];
 
   int get length => value.length;
 
