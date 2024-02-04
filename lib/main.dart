@@ -22,7 +22,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final contactBook = ContactBook();
     return Scaffold(
       appBar: AppBar(
         title: const Text(''),
@@ -30,15 +29,21 @@ class HomePage extends StatelessWidget {
       body: ValueListenableBuilder(
         valueListenable: ContactBook(),
         builder: (context, value, child) {
+          final contacts = value;
           return ListView.builder(
-            itemCount: contactBook.length,
+            itemCount: contacts.length,
             itemBuilder: (context, index) {
-              final contact = contactBook.contact(
-                atIndex: index,
-              )!;
-              return ListTile(
-                title: Text(
-                  contact.name,
+              final contact = contacts[index];
+              return Dismissible(
+                key: ValueKey(contact.id),
+                child: Material(
+                  color: Colors.white,
+                  elevation: 6,
+                  child: ListTile(
+                    title: Text(
+                      contact.name,
+                    ),
+                  ),
                 ),
               );
             },
