@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
+const newContactRoute = '/new-contact';
+
 void main() {
   runApp(
     MaterialApp(
@@ -11,7 +13,7 @@ void main() {
       ),
       home: const HomePage(),
       routes: {
-        '/new-contact': (context) => const NewContactView(),
+        newContactRoute: (context) => const NewContactView(),
       },
     ),
   );
@@ -54,7 +56,9 @@ class HomePage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed(newContactRoute);
+        },
         child: const Icon(
           Icons.add,
         ),
